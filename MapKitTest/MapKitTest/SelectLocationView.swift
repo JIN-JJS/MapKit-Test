@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SelectLocationView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text("선택된 주소 : 서울시 성북구")
     }
 }
 
