@@ -12,6 +12,7 @@
 		C00133B32BB15CA1001E05DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C00133B22BB15CA1001E05DE /* Assets.xcassets */; };
 		C00133B62BB15CA1001E05DE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C00133B52BB15CA1001E05DE /* Preview Assets.xcassets */; };
 		C00133BD2BB16135001E05DE /* LocationSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00133BC2BB16135001E05DE /* LocationSearchView.swift */; };
+		C00133BF2BB1617F001E05DE /* SelectLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00133BE2BB1617F001E05DE /* SelectLocationView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +22,7 @@
 		C00133B22BB15CA1001E05DE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C00133B52BB15CA1001E05DE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C00133BC2BB16135001E05DE /* LocationSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchView.swift; sourceTree = "<group>"; };
+		C00133BE2BB1617F001E05DE /* SelectLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 				C00133AE2BB15CA0001E05DE /* MapKitTestApp.swift */,
 				C00133B02BB15CA0001E05DE /* ContentView.swift */,
 				C00133BC2BB16135001E05DE /* LocationSearchView.swift */,
+				C00133BE2BB1617F001E05DE /* SelectLocationView.swift */,
 				C00133B22BB15CA1001E05DE /* Assets.xcassets */,
 				C00133B42BB15CA1001E05DE /* Preview Content */,
 			);
@@ -143,6 +146,7 @@
 				C00133B12BB15CA0001E05DE /* ContentView.swift in Sources */,
 				C00133BD2BB16135001E05DE /* LocationSearchView.swift in Sources */,
 				C00133AF2BB15CA0001E05DE /* MapKitTestApp.swift in Sources */,
+				C00133BF2BB1617F001E05DE /* SelectLocationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
