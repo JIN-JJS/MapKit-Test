@@ -23,6 +23,17 @@ class LocationViewModel: NSObject, ObservableObject, MKMapViewDelegate, CLLocati
     
     // MARK: User Location
     @Published var userLocation: CLLocation?
+    @Published var locationLocality: String = ""
+    @Published var locationSubLocality: String = ""
+    
+    var latitude: Double {
+        manager.location?.coordinate.latitude ?? 37.596970
+    }
+    
+    var longitude: Double {
+        manager.location?.coordinate.longitude ?? -127.036119
+    }
+    
     
     // MARK: Final Location
     @Published var pickedLocation: CLLocation?
@@ -148,4 +159,56 @@ class LocationViewModel: NSObject, ObservableObject, MKMapViewDelegate, CLLocati
         let place = try await CLGeocoder().reverseGeocodeLocation(location).first
         return place
     }
+    
+    func reverseGeocodingLocality(latitude: CLLocationDegrees, longitude: CLLocationDegrees,completion : @escaping(String) -> ()){
+               let geocoder = CLGeocoder()
+               let location = CLLocation(latitude: latitude, longitude: longitude)
+       
+           geocoder.reverseGeocodeLocation(location) {placemarks, error in
+               if let placemark = placemarks?.first {
+                   let userLocaltiy = placemark.userLocality!
+                   completion(userLocaltiy)
+               }
+           }
+       }
+    
+    func reverseGeocodingSubLocality(latitude: CLLocationDegrees, longitude: CLLocationDegrees,completion : @escaping(String) -> ()){
+               let geocoder = CLGeocoder()
+               let location = CLLocation(latitude: latitude, longitude: longitude)
+       
+           geocoder.reverseGeocodeLocation(location) {placemarks, error in
+               if let placemark = placemarks?.first {
+                   let userSubLocality = placemark.userSubLocality!
+                   completion(userSubLocality)
+               }
+           }
+       }
+}
+
+extension CLPlacemark {
+
+    var userLocality: String? {
+        
+       var result = ""
+        
+        if let city = locality {
+            result += "\(city)"
+        }
+
+       return result
+       
+    }
+    
+    var userSubLocality: String? {
+        
+       var result = ""
+            
+        if let subcity = subLocality {
+            result += " \(subcity)"
+        }
+
+       return result
+       
+    }
+
 }

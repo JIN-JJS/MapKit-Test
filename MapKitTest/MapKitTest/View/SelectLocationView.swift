@@ -55,10 +55,11 @@ struct SelectLocationView: View {
                             HStack(spacing: 15) {
                                 Image(systemName: "mappin.circle.fill")
                                     .font(.title2)
+                                    .frame(width: 40, height: 40)
                                     .foregroundColor(.gray)
                                 
                                 VStack(alignment: .leading, spacing: 6) {
-                                    Text(place.name ?? "")
+                                    Text(place.subLocality ?? "")
                                         .font(.title3.bold())
                                         .foregroundColor(.primary)
                                     
@@ -68,32 +69,50 @@ struct SelectLocationView: View {
                                 }
                             }
                         }
+                        
                     }
                 }
                 .listStyle(.plain)
             } else {
-            // MARK: Live Location Button
-                Button {
+                List {
+                  
+                        HStack(spacing: 15) {
+                            Image(systemName: "mappin.circle.fill")
+                                .font(.title2)
+                                .frame(width: 40, height: 40)
+                                .foregroundColor(.gray)
+                            
+                            VStack(alignment: .leading, spacing: 6) {
+                                Text("\(locationViewModel.locationSubLocality)")
+                                    .font(.title3.bold())
+                                    .foregroundColor(.primary)
+                                
+                                Text("\(locationViewModel.locationLocality)")
+                                    .font(.caption)
+                                    .foregroundColor(.gray)
+                            }
+                        }
+                  
+                    
 
-                    // MARK: setting Map Region
-                    if let coordinate = locationViewModel.userLocation?.coordinate {
-                        locationViewModel.mapView.region = .init(center: coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
-                        locationViewModel.addDraggablePin(coordinate: coordinate)
-                        locationViewModel.updatePlaceMark(location: .init(latitude: coordinate.latitude, longitude: coordinate.longitude))
-                        
-                        // MARK: Navigationg To MapView
-                        navigationTag = "MAPVIEW"
-                    }
-                } label: {
-                    Label {
-                        Text("Use Current Location")
-                            .font(.callout)
-                    } icon: {
-                         Image(systemName: "location.north.circle.fill")
-                    }
-                    .foregroundColor(.green)
+                    
+                    
+                    
                 }
-                .frame(maxWidth: .infinity, alignment: .leading)
+                .listStyle(.plain)
+                .task {
+                    self.locationViewModel.reverseGeocodingLocality(latitude: locationViewModel.latitude, longitude: locationViewModel.longitude) {address in
+                        self.locationViewModel.locationLocality = address
+                    }
+                    self.locationViewModel.reverseGeocodingSubLocality(latitude: locationViewModel.latitude, longitude: locationViewModel.longitude) {address in
+                        self.locationViewModel.locationSubLocality = address
+                    }
+                }
+                
+                
+                
+                
+                
             }
         }
         .padding(.all, 25)
@@ -142,10 +161,11 @@ struct MapViewSelection: View {
                     HStack(spacing: 15) {
                         Image(systemName: "mappin.circle.fill")
                             .font(.title2)
+                            .frame(width: 40, height: 40)
                             .foregroundColor(.gray)
                         
                         VStack(alignment: .leading, spacing: 6) {
-                            Text(place.name ?? "")
+                            Text(place.subLocality ?? "")
                                 .font(.title3.bold())
                             
                             Text(place.locality ?? "")
